@@ -1,7 +1,7 @@
 title: Dawon Ahn
 author: Dawon Ahn
 avatar: /logo.png
-email: dawon@snu.ac.kr
+email: dahn017@ucr.edu
 
 plugins:
   - jekyll-remote-theme
@@ -43,6 +43,6 @@ lang:
 # Customize
 
 skin: daylight
-location: Seoul, South Korea
+location: Riverside, CA, USA
 subscribe: False
 
