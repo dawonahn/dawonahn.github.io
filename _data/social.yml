@@ -7,3 +7,6 @@
 - title: Google Scholar
   url: https://scholar.google.com/citations?user=OiNktJYAAAAJ&hl=en&oi=ao
   icon: fas fa-graduation-cap
+- title: CV
+  url: /assets/cv.pdf
+  icon: fas fa-file-pdf
