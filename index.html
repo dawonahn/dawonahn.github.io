@@ -10,7 +10,7 @@
 <h1>Dawon Ahn</h1>
 
 <section id="about">
-<div class="portrait" tabindex="0" aria-describedby="photo-location"><img src="assets/profile.jpeg" alt="Profile portrait outdoors among green foliage" width="1680" height="1120"><span id="photo-location" class="photo-location">Palace of Fine Arts, San Francisco</span></div>
+<div class="portrait" tabindex="0" role="button" aria-label="Toggle photo location" aria-controls="photo-location" aria-expanded="false" aria-describedby="photo-location"><img src="assets/profile.jpeg" alt="Profile portrait outdoors among green foliage" width="1680" height="1120"><span id="photo-location" class="photo-location">Palace of Fine Arts, San Francisco</span></div>
 <div class="bio">
 <p>Hi there! I am a Ph.D. candidate in Computer Science at UC Riverside, advised by Prof. <a href="https://www.cs.ucr.edu/~epapalex/">Papalexakis</a>, and expect to graduate in December 2026.</p>
 <p>I’m interested in developing <strong>efficient and interpretable machine learning models</strong>. Much of my Ph.D. research builds on <strong>tensor methods</strong> for analyzing large-scale sparse tensors and compressing neural networks. More recently, I’ve been developing <strong>neural operators</strong> for scientific and engineering applications, particularly computational fluid dynamics.</p>
@@ -31,6 +31,18 @@
 <script>
 const portrait = document.querySelector('.portrait');
 const locationTip = document.getElementById('photo-location');
+const toggleLocation = () => {
+ if (!window.matchMedia('(hover: none)').matches) return;
+ const open = portrait.classList.toggle('location-open');
+ portrait.setAttribute('aria-expanded', String(open));
+};
+portrait.addEventListener('click', toggleLocation);
+portrait.addEventListener('keydown', event => {
+ if (event.key === 'Enter' || event.key === ' ') {
+  event.preventDefault();
+  toggleLocation();
+ }
+});
 const person = [[50,30],[54.2,31.2],[56.9,35.7],[58,42.9],[57.1,51.8],[56,56.2],[57.1,58],[64.9,62.1],[71.4,68.8],[75.2,78.6],[76.4,85.7],[74.4,92.9],[71.4,98.2],[70.2,100],[25.6,100],[25.2,96.4],[22,87.5],[21.7,81.2],[24.4,73.2],[31,65.2],[35.7,61.6],[43.5,57.5],[44.3,53.6],[42.3,50],[42.3,41.1],[44,34.8],[47,31.2]];
 const insidePerson = (x, y) => {
  let inside = false;
