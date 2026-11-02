@@ -1,3 +1,62 @@
----
-layout: home
----
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Computer Science PhD student at UC Riverside researching tensor methods for interpretability and efficiency.">
+<title>Dawon Ahn</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+<h1>Dawon Ahn</h1>
+
+<section id="about">
+<div class="portrait" tabindex="0" aria-describedby="photo-location"><img src="assets/profile.jpeg" alt="Profile portrait outdoors among green foliage" width="1680" height="1120"><span id="photo-location" class="photo-location">Palace of Fine Arts, San Francisco</span></div>
+<div class="bio">
+<p>Hi there! I am a Ph.D. candidate in Computer Science at UC Riverside, advised by Prof. <a href="https://www.cs.ucr.edu/~epapalex/">Papalexakis</a>, and expect to graduate in December 2026.</p>
+<p>I’m interested in developing <strong>efficient and interpretable machine learning models</strong>. Much of my Ph.D. research builds on <strong>tensor methods</strong> for analyzing large-scale sparse tensors and compressing neural networks. More recently, I’ve been developing <strong>neural operators</strong> for scientific and engineering applications, particularly computational fluid dynamics.</p>
+<p>Before joining UCR, I studied Math at CNU and worked as a research intern with Prof. <a href="https://datalab.snu.ac.kr/~ukang/">U Kang</a> at SNU. During my Ph.D., I also interned at <a href="https://research.cisco.com/">Cisco</a>, <a href="https://usa.visa.com/about-visa/visa-research.html">Visa</a>, and <a href="https://research.nvidia.com/labs/aie/">NVIDIA</a>.</p>
+</div>
+<div class="profile-links" aria-label="Profile links">
+<a href="mailto:dahn017@ucr.edu"><strong>Email</strong></a>
+<a href="https://github.com/dawonahn"><strong>GitHub</strong></a>
+<a href="https://www.linkedin.com/in/dawon-ahn-110869168/"><strong>LinkedIn</strong></a>
+<a href="https://scholar.google.com/citations?user=OiNktJYAAAAJ&amp;hl=en"><strong>Google Scholar</strong></a>
+<a href="cv.html"><strong>CV</strong></a>
+</div>
+</section>
+
+
+
+</main>
+<script>
+const portrait = document.querySelector('.portrait');
+const locationTip = document.getElementById('photo-location');
+const person = [[50,30],[54.2,31.2],[56.9,35.7],[58,42.9],[57.1,51.8],[56,56.2],[57.1,58],[64.9,62.1],[71.4,68.8],[75.2,78.6],[76.4,85.7],[74.4,92.9],[71.4,98.2],[70.2,100],[25.6,100],[25.2,96.4],[22,87.5],[21.7,81.2],[24.4,73.2],[31,65.2],[35.7,61.6],[43.5,57.5],[44.3,53.6],[42.3,50],[42.3,41.1],[44,34.8],[47,31.2]];
+const insidePerson = (x, y) => {
+ let inside = false;
+ for (let i = 0, j = person.length - 1; i < person.length; j = i++) {
+  const [xi, yi] = person[i], [xj, yj] = person[j];
+  if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+ }
+ return inside;
+};
+portrait.addEventListener('pointermove', event => {
+ if (event.pointerType === 'touch') return;
+ const box = portrait.getBoundingClientRect();
+ const overPerson = insidePerson((event.clientX - box.left) / box.width * 100, (event.clientY - box.top) / box.height * 100);
+ portrait.classList.toggle('over-person', overPerson);
+ if (overPerson) return;
+ const gap = 14;
+ const width = locationTip.offsetWidth;
+ const height = locationTip.offsetHeight;
+ const left = Math.max(8, Math.min(event.clientX + gap, window.innerWidth - width - 8));
+ const top = event.clientY + gap + height <= window.innerHeight - 8
+  ? event.clientY + gap : Math.max(8, event.clientY - height - gap);
+ locationTip.style.left = left + 'px';
+ locationTip.style.top = top + 'px';
+ portrait.classList.add('pointer-caption');
+});
+portrait.addEventListener('pointerleave', () => portrait.classList.remove('pointer-caption', 'over-person'));
+</script>
+</body>
+</html>
