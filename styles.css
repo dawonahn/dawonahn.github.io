@@ -37,3 +37,5 @@ h1{font-size:35px}
 
 .profile-links{width:484px;max-width:100%}
 @media(max-width:650px){.profile-links{width:100%;justify-content:space-between;gap:8px;font-size:clamp(12px,3.4vw,14px)}}
+
+@media(min-width:651px){main{max-width:548px}}
